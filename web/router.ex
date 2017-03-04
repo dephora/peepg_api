@@ -14,4 +14,6 @@ defmodule PeepgApi.Router do
  
   forward "/graphiql", Absinthe.Plug.GraphiQL,
     schema: PeepgApi.Schema
+
+    
 end
