@@ -3,8 +3,13 @@ defmodule PeepgApi.Repo.Migrations.CreateUser do
 
   def change do
     create table(:users) do
-      add :name, :string
+      add :name_first, :string
+      add :name_last, :string
+      add :phone_main, :string
+      add :phone_main_ext, :string
       add :email, :string
+      add :status, :string
+      add :role, :string
 
       timestamps()
     end
