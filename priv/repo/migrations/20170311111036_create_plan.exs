@@ -3,7 +3,7 @@ defmodule PeepgApi.Repo.Migrations.CreatePlan do
 
   def change do
     create table(:plans) do
-      add :plan_code, :string
+      add :plan_code, :string, null: false
       add :name, :string
       add :description, :string
       add :active, :boolean, default: false, null: false

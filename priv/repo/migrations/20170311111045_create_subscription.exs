@@ -3,8 +3,8 @@ defmodule PeepgApi.Repo.Migrations.CreateSubscription do
 
   def change do
     create table(:subscriptions) do
-      add :start_date, :date
-      add :end_date, :date
+      add :start_date, :date, null: false
+      add :end_date, :date, null: false
       add :organization_id, references(:organizations, on_delete: :nothing)
       add :plan_id, references(:plans, on_delete: :nothing)
 

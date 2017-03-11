@@ -3,7 +3,7 @@ defmodule PeepgApi.Repo.Migrations.CreateBillingCode do
 
   def change do
     create table(:billing_codes) do
-      add :name, :string
+      add :name, :string, null: false
       add :organization_id, references(:organizations, on_delete: :nothing)
 
       timestamps()
