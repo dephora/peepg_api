@@ -35,20 +35,21 @@ defmodule PeepgApi.Schema.Types do
     # field :billing_codes, list_of(:billing_code), resolve: assoc(:billing_codes)
   end
 
-  # object :organization do
-  #   field :id, :id
-  #   field :name, :string
-  #   field :phone_main, :string
-  #   field :phone_main_ext, :string
-  #   field :phone_secondary, :string
-  #   field :phone_secondary_ext, :string
-  #   field :email, :string
-  #   field :status, :string
-  #   field :comments, :string
-  #   field :users, list_of(:user), resolve: assoc(:users)
-  #   field :images, list_of(:image), resolve: assoc(:billing_codes)
-  #   field :billing_codes, list_of(:billing_code), resolve: assoc(:billing_codes)
-  # end
+  object :organization do
+    field :id, :id
+    field :name_main, :string
+    field :name_secondary, :string
+    field :phone_main, :string
+    field :phone_main_ext, :string
+    field :phone_secondary, :string
+    field :phone_secondary_ext, :string
+    field :email, :string
+    field :status, :string
+    field :comments, :string
+    # field :users, list_of(:user), resolve: assoc(:users)
+    # field :images, list_of(:image), resolve: assoc(:billing_codes)
+    # field :billing_codes, list_of(:billing_code), resolve: assoc(:billing_codes)
+  end
 
 
 end

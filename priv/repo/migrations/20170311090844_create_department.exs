@@ -11,9 +11,13 @@ defmodule PeepgApi.Repo.Migrations.CreateDepartment do
       add :email, :string
       add :status, :string
       add :comments, :string
+      add :organization_id, references(:organizations, on_delete: :nothing)
+      add :billing_code_id, references(:billing_codes, on_delete: :nothing)
 
       timestamps()
     end
+    create index(:departments, [:organization_id])
+    create index(:departments, [:billing_code_id])
 
   end
 end

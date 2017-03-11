@@ -10,7 +10,8 @@ defmodule PeepgApi.Department do
     field :email, :string
     field :status, :string
     field :comments, :string
-    has_many :user, PeepgApi.User
+    belongs_to :organization, PeepgApi.Organization
+    belongs_to :billing_code, PeepgApi.BillingCode
 
     timestamps()
   end
