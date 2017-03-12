@@ -19,7 +19,7 @@ defmodule PeepgApi.Plan do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:plan_code, :name, :description, :active, :plan_interval_unit, :plan_interval_length, :plan_quota])
-    |> validate_required([:plan_code, :name, :description, :active, :plan_interval_unit, :plan_interval_length, :plan_quota])
+    |> validate_required([:plan_code, :name, :active, :plan_interval_unit, :plan_interval_length, :plan_quota])
     |> unique_constraint(:description)
   end
 end

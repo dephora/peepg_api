@@ -19,7 +19,9 @@ defmodule PeepgApi.User do
     field :current_sign_in_ip, :string
     field :last_sign_in_ip, :string
     field :remember_inserted_at, Ecto.DateTime
+
     belongs_to :department, PeepgApi.Department
+    has_many :images, PeepgApi.Image
 
     timestamps()
   end
