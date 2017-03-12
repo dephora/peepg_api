@@ -4,25 +4,44 @@ defmodule PeepgApi.Schema do
   # will need to do multiple imports of all the type files 
   # once they are broken up
 
+  # mutation do
+
+  #   @desc "Create a user"
+  #   field: user, type: user do
+  #     arg :email, non_null(:string)
+  #     arg :name_first, non_null(:string)
+  #     arg :name_last, non_null(:string)
+  #     arg :phone_main, :string
+  #     arg :phone_main_ext, :string
+  #     arg :status, non_null(:string)
+  #     arg :roles_mask, non_null(:int)
+
+  #     resolve &PeepgApi.UserResolver.create/2
+    
+  # end
+
+  #   @desc "Create an organization"
+  #   field: user, type: user do
+  #     arg :name_first, non_null(:string)
+  #     arg :name_secondary, :string
+  #     arg :phone_main, :string
+  #     arg :email, non_null(:string)
+  #     arg :phone_main_ext, :string
+  #     arg :status, non_null(:string)
+  #     arg :roles_mask, non_null(:int)
+
+  #     resolve &PeepgApi.UserResolver.create/2
+  #   end
+  # end
+
   query do
 
-    @desc "Get all posts"
-    field :posts, list_of(:post) do
-      resolve &PeepgApi.PostResolver.all/2
-    end
-    
-    @desc "Get a post by ID"
-    field :post, type: :post do
-      arg :id, non_null(:id)
-      resolve &PeepgApi.PostResolver.find/2
-    end
-
-    @desc "Get all of users"
+    @desc "Get a list of users"
     field :users, list_of(:user) do
       resolve &PeepgApi.UserResolver.all/2
     end
 
-    @desc "Get a user by ID"
+    @desc "Get a single user by ID"
     field :user, type: :user do
       arg :id, non_null(:id)
       resolve &PeepgApi.UserResolver.find/2

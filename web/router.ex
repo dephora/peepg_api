@@ -9,7 +9,7 @@ defmodule PeepgApi.Router do
   #   pipe_through :api
   # end
 
-  forward "/api", Absinthe.Plug,
+  forward "/graphql", Absinthe.Plug,
     schema: PeepgApi.Schema
  
   forward "/graphiql", Absinthe.Plug.GraphiQL,
