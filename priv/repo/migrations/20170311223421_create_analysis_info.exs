@@ -7,7 +7,7 @@ defmodule PeepgApi.Repo.Migrations.CreateAnalysisInfo do
       add :analyzed_parts, :integer
       add :metadata, :string
       add :approval_status, :string
-      add :approval_updated_at, :naive_datetime
+      add :approval_updated_at, :utc_datetime
       add :final_grade, :integer
       add :image_id, references(:images, on_delete: :nothing)
 

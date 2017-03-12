@@ -3,8 +3,8 @@ defmodule PeepgApi.Repo.Migrations.CreateAnalysisPreset do
 
   def change do
     create table(:analysis_presets) do
-      add :name, :string, null: false
-      add :settings, :string, size: 50
+      add :name, :string, null: false, size: 50
+      add :settings, :string
       add :billing_code_id, references(:billing_codes, on_delete: :nothing)
 
       timestamps()

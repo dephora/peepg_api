@@ -10,6 +10,7 @@ defmodule PeepgApi.Department do
     field :email, :string
     field :status, :string
     field :comments, :string
+    field :remember_inserted_at, Ecto.DateTime
     belongs_to :organization, PeepgApi.Organization
     belongs_to :billing_code, PeepgApi.BillingCode
 
@@ -21,7 +22,7 @@ defmodule PeepgApi.Department do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :phone_main, :phone_main_ext, :phone_secondary, :phone_secondary_ext, :email, :status, :comments])
-    |> validate_required([:name, :phone_main, :phone_main_ext, :phone_secondary, :phone_secondary_ext, :email, :status, :comments])
+    |> cast(params, [:name, :phone_main, :phone_main_ext, :phone_secondary, :phone_secondary_ext, :email, :status, :comments, :remember_inserted_at])
+    |> validate_required([:name, :phone_main, :phone_main_ext, :phone_secondary, :phone_secondary_ext, :email, :status, :comments, :remember_inserted_at])
   end
 end

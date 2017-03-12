@@ -4,12 +4,12 @@ defmodule PeepgApi.Repo.Migrations.CreatePlan do
   def change do
     create table(:plans) do
       add :plan_code, :string, null: false
-      add :name, :string
+      add :name, :string, null: false
       add :description, :string
       add :active, :boolean, default: false, null: false
-      add :plan_interval_unit, :string
-      add :plan_interval_length, :integer
-      add :plan_quota, :integer
+      add :plan_interval_unit, :string, null: false
+      add :plan_interval_length, :integer, null: false
+      add :plan_quota, :integer, null: false
 
       timestamps()
     end

@@ -12,8 +12,8 @@ defmodule PeepgApi.Repo.Migrations.CreateOrganization do
       add :email_main, :string, null: false
       add :email_secondary, :string
       add :status, :string, null: false
-      add :comments, :string
-      add :remember_inserted_at, :naive_datetime
+      add :comments, :text
+      add :remember_inserted_at, :utc_datetime    
 
       timestamps()
     end

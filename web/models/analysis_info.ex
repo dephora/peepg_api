@@ -19,6 +19,8 @@ defmodule PeepgApi.AnalysisInfo do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
-    |> validate_required([:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
+    # |> validate_required([:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
   end
+
+  
 end

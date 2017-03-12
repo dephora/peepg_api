@@ -17,5 +17,8 @@ defmodule PeepgApi.AnalysisPreset do
     |> cast(params, [:name, :settings])
     |> validate_required([:name, :settings])
     |> unique_constraint(:name)
+    |> validate_length(:name, max: 50)
   end
+
+  
 end
