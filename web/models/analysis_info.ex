@@ -6,9 +6,11 @@ defmodule PeepgApi.AnalysisInfo do
     field :analyzed_parts, :integer
     field :metadata, :string
     field :approval_status, :string
-    field :approval_updated_at, Ecto.DateTime
+    field :approval_updated_at, Timex.Ecto.DateTime
     field :final_grade, :integer
     belongs_to :image, PeepgApi.Image
+
+    #todo approval_updated_by_id (user)
 
     timestamps()
   end
@@ -21,6 +23,11 @@ defmodule PeepgApi.AnalysisInfo do
     |> cast(params, [:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
     # |> validate_required([:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
   end
+
+  
+  # def validate_part_difference(changeset, field) do
+    
+  # end
 
   
 end

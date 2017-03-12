@@ -2,7 +2,8 @@ defmodule PeepgApi.Department do
   use PeepgApi.Web, :model
 
   schema "departments" do
-    field :name, :string
+    field :name_main, :string
+    field :name_secondary, :string
     field :phone_main, :string
     field :phone_main_ext, :string
     field :phone_secondary, :string
@@ -10,7 +11,7 @@ defmodule PeepgApi.Department do
     field :email, :string
     field :status, :string
     field :comments, :string
-    field :remember_inserted_at, Ecto.DateTime
+    field :remember_inserted_at, Timex.Ecto.DateTime
     belongs_to :organization, PeepgApi.Organization
     belongs_to :billing_code, PeepgApi.BillingCode
 

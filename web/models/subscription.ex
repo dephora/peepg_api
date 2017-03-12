@@ -2,8 +2,8 @@ defmodule PeepgApi.Subscription do
   use PeepgApi.Web, :model
 
   schema "subscriptions" do
-    field :start_date, Ecto.Date
-    field :end_date, Ecto.Date
+    field :start_date, Timex.Ecto.Date
+    field :end_date, Timex.Ecto.Date
     belongs_to :organization, PeepgApi.Organization
     belongs_to :plan, PeepgApi.Plan
 

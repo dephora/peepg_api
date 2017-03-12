@@ -3,7 +3,7 @@ defmodule PeepgApi.Repo.Migrations.CreateDepartment do
 
   def change do
     create table(:departments) do
-      add :name, :string, null: false
+      add :name_main, :string, null: false
       add :phone_main, :string
       add :phone_main_ext, :string, null: false
       add :phone_secondary, :string
@@ -11,7 +11,7 @@ defmodule PeepgApi.Repo.Migrations.CreateDepartment do
       add :email, :string, null: false
       add :status, :string, null: false
       add :comments, :text
-      add :remember_inserted_at, :utc_datetime, null: false
+      add :remember_inserted_at, :utc_datetime
       add :organization_id, references(:organizations, on_delete: :nothing)
       add :billing_code_id, references(:billing_codes, on_delete: :nothing)
 

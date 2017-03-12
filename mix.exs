@@ -19,7 +19,7 @@ defmodule PeepgApi.Mixfile do
   def application do
     [mod: {PeepgApi, []},
      applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :absinthe, :absinthe_plug, :absinthe_ecto, :faker, :cors_plug,]]
+                    :phoenix_ecto, :postgrex, :absinthe, :absinthe_plug, :absinthe_ecto, :faker, :cors_plug, :timex,:timex_ecto, :ex_phone_number ]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,8 +38,11 @@ defmodule PeepgApi.Mixfile do
      {:absinthe, "~> 1.2"},
      {:absinthe_plug, "~> 1.2"},
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
-     {:faker, "~> 0.7.0"},
+     {:faker, git: "https://github.com/igas/faker.git"},
      {:cors_plug, "~> 1.2"},
+     {:timex, "~> 3.0"},
+     {:timex_ecto, "~> 3.0"},
+     {:ex_phone_number, git: "https://github.com/socialpaymentsbv/ex_phone_number.git", branch: "develop"},
      {:cowboy, "~> 1.0"}]
   end
 

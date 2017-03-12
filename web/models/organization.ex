@@ -12,7 +12,7 @@ defmodule PeepgApi.Organization do
     field :email_secondary, :string
     field :status, :string
     field :comments, :string
-    field :remember_inserted_at, Ecto.DateTime
+    field :remember_inserted_at, Timex.Ecto.DateTime
 
     has_many :departments, PeepgApi.Department
     has_many :subscriptions, PeepgApi.Subscription
