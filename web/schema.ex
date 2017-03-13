@@ -113,6 +113,39 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.PlanResolver.find/2
     end
 
+    @desc "Get a list of all images."
+    field :image, list_of(:image) do
+      resolve &PeepgApi.ImageResolver.all/2
+    end
+
+    @desc "Get a single image by ID."
+    field :image, type: :image do
+      arg :id, non_null(:id)
+      resolve &PeepgApi.ImageResolver.find/2
+    end
+
+    @desc "Get a list of all analysis infos."
+    field :analysis_info, list_of(:analysis_info) do
+      resolve &PeepgApi.AnalysisInfoResolver.all/2
+    end
+
+    @desc "Get a single analyis info by ID."
+    field :analysis_info, type: :analysis_info do
+      arg :id, non_null(:id)
+      resolve &PeepgApi.AnalysisInfoResolver.find/2
+    end
+
+    @desc "Get a list of all analysis presets."
+    field :analysis_info, list_of(:analysis_info) do
+      resolve &PeepgApi.AnalysisInfoResolver.all/2
+    end
+
+    @desc "Get a single analyis preset by ID."
+    field :analysis_info, type: :analysis_info do
+      arg :id, non_null(:id)
+      resolve &PeepgApi.AnalysisInfoResolver.find/2
+    end
+
 
   end
 end
