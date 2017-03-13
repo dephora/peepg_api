@@ -34,9 +34,10 @@ defmodule PeepgApi.Schema do
   #   end
   # end
 
+  
   query do
 
-    @desc "Get a list of all `organizations`."
+    @desc "Get a list of all organizations."
     field :organizations, list_of(:organization) do
       resolve &PeepgApi.OrganizationResolver.all/2
     end
@@ -70,7 +71,7 @@ defmodule PeepgApi.Schema do
     end
 
     @desc "Get a list of all billing codes."
-    field :billing_code, list_of(:billing_code) do
+    field :billing_codes, list_of(:billing_code) do
       resolve &PeepgApi.BillingCodeResolver.all/2
     end
 
@@ -81,7 +82,7 @@ defmodule PeepgApi.Schema do
     end
 
     @desc "Get a list of all billing groups."
-    field :billing_group, list_of(:billing_group) do
+    field :billing_groups, list_of(:billing_group) do
       resolve &PeepgApi.BillingGroupResolver.all/2
     end
 
@@ -91,19 +92,19 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.BillingGroupResolver.find/2
     end
 
-    @desc "Get a list of all subscriptions."
-    field :subscription, list_of(:subscription) do
-      resolve &PeepgApi.SubscriptionResolver.all/2
-    end
+    # @desc "Get a list of all subscriptions."
+    # field :subscriptions, list_of(:subscription) do
+    #   resolve &PeepgApi.SubscriptionResolver.all/2
+    # end
 
-    @desc "Get a single subscription code by ID."
-    field :subscription, type: :subscription do
-      arg :id, non_null(:id)
-      resolve &PeepgApi.SubscriptionResolver.find/2
-    end
+    # @desc "Get a single subscription code by ID."
+    # field :subscription, type: :subscription do
+    #   arg :id, non_null(:id)
+    #   resolve &PeepgApi.SubscriptionResolver.find/2
+    # end
 
     @desc "Get a list of all plans."
-    field :plan, list_of(:plan) do
+    field :plans, list_of(:plan) do
       resolve &PeepgApi.PlanResolver.all/2
     end
 
@@ -114,7 +115,7 @@ defmodule PeepgApi.Schema do
     end
 
     @desc "Get a list of all images."
-    field :image, list_of(:image) do
+    field :images, list_of(:image) do
       resolve &PeepgApi.ImageResolver.all/2
     end
 
@@ -125,7 +126,7 @@ defmodule PeepgApi.Schema do
     end
 
     @desc "Get a list of all analysis infos."
-    field :analysis_info, list_of(:analysis_info) do
+    field :analysis_infos, list_of(:analysis_info) do
       resolve &PeepgApi.AnalysisInfoResolver.all/2
     end
 
@@ -136,12 +137,12 @@ defmodule PeepgApi.Schema do
     end
 
     @desc "Get a list of all analysis presets."
-    field :analysis_info, list_of(:analysis_info) do
+    field :analysis_presets, list_of(:analysis_preset) do
       resolve &PeepgApi.AnalysisInfoResolver.all/2
     end
 
     @desc "Get a single analyis preset by ID."
-    field :analysis_info, type: :analysis_info do
+    field :analysis_preset, type: :analysis_preset do
       arg :id, non_null(:id)
       resolve &PeepgApi.AnalysisInfoResolver.find/2
     end

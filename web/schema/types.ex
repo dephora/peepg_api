@@ -38,14 +38,14 @@ defmodule PeepgApi.Schema.Types do
       description: "Something about locking accounts and the options"
     field :comments, :string,
       description: "Comments about the organization."
-    field :inserted_at, :datetime, #need a datetime
+    field :inserted_at, :string, #need a datetime
       description: "Identifies the date and time when the object was inserted."
-    field :updated_at, :datetime, #need a datetime
+    field :updated_at, :string, #need a datetime
       description: "Identifies the date and time when the object was updated."
 
     field :departments, list_of(:department), resolve: assoc(:departments)
     # # # field :quota_periods, list_of(:quota_period), resolve: assoc(:quota_periods)
-    field :subscriptions, list_of(:subscription), resolve: assoc(:subscriptions)
+    # field :subscriptions, list_of(:subscription), resolve: assoc(:subscriptions)
     field :billing_codes, list_of(:billing_code), resolve: assoc(:billing_codes)
 
     # can we get users and images for all depts within the org?
@@ -56,7 +56,7 @@ defmodule PeepgApi.Schema.Types do
     # need to handle the contact lead / secondary
   end
 
-  # It's not really an 'account', should we use 'entity'?  
+  # It's not really an 'account', should we use 'entity'?
   @desc "A department is a CytoSavvy account that belongs to an organization and has users."
   object :department do
 
@@ -81,9 +81,9 @@ defmodule PeepgApi.Schema.Types do
       description: "Something about locking accounts and the options"
     field :comments, :string,
       description: "Comments about the organization."
-    field :inserted_at, :datetime, #need a datetime
+    field :inserted_at, :string, #need a datetime
       description: "Identifies the date and time when the object was inserted."
-    field :updated_at, :datetime, #need a datetime
+    field :updated_at, :string, #need a datetime
       description: "Identifies the date and time when the object was updated."
 
     field :organization, :organization, resolve: assoc(:organization)
@@ -125,6 +125,10 @@ defmodule PeepgApi.Schema.Types do
       description: "Identifies the IP of the current user sign-in."
     field :last_sign_in_ip, :string,
       description: "Identifies the IP of the last user sign-in."
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     # can a user be in multiple depts?
     field :department, :department, resolve: assoc(:department),
@@ -139,6 +143,10 @@ defmodule PeepgApi.Schema.Types do
     field :id, :id
     field :name, :string,
       description: "The billing code name."
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     field :organization, :organization, resolve: assoc(:organization)
   end
@@ -147,18 +155,26 @@ defmodule PeepgApi.Schema.Types do
   @desc "************* NEED GOOD DESC ***************"
   object :billing_group do
     field :id, :id
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     field :billing_code, :billing_code, resolve: assoc(:billing_code)
     field :department, :department, resolve: assoc(:department)
   end
 
-  @desc "A subscription is an organization's start and end date of a particular plan - ????????????"
+  # @desc "A subscription is an organization's start and end date of a particular plan - ????????????"
   object :subscription do
     field :id, :id
     field :start_date, :string, #datetime
       description: "Identifies the start date of the subscription."
     field :end_date, :string, #datetime
       description: "Identifies the end date of the subscription."
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     field :organization, :organization, resolve: assoc(:organization)
     field :plan, :plan, resolve: assoc(:plan)
@@ -168,9 +184,9 @@ defmodule PeepgApi.Schema.Types do
   object :plan do
     field :id, :id
     field :plan_code, :string,
-      description: "The code of the plan." 
+      description: "The code of the plan."
     field :name, :string,
-      description: "The name of the plan." 
+      description: "The name of the plan."
     field :description, :string,
       description: "The description of the plan."
     field :active, :boolean,
@@ -178,28 +194,36 @@ defmodule PeepgApi.Schema.Types do
     field :plan_interval_unit, :string,
       description: "The plan interval unit of measurement (days, weeks, etc.)"
     field :plan_interval_length, :integer,
-      description: "The plan interval length based on plan_interval_unit."    
+      description: "The plan interval length based on plan_interval_unit."
     field :plan_quota, :integer,
-      description: "The limit of image uploads of the plan." 
+      description: "The limit of image uploads of the plan."
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
   end
 
   @desc "Represents an uploaded image."
   object :image do
     field :id, :id
     field :name_original, :string,
-      description: "The ############################."  
+      description: "The ############################."
     field :name_processed, :string,
-      description: "The ############################."      
+      description: "The ############################."
     field :filename_original, :string,
-      description: "The original filename of the image." 
+      description: "The original filename of the image."
     field :processing_stage, :string,
-      description: "The processing stage of the image ***********"      
+      description: "The processing stage of the image ***********"
     field :state, :string,
-      description: "###################" 
+      description: "###################"
     field :metadata, :string,
-      description: "The metadata the image contains."       
+      description: "The metadata the image contains."
     field :analysis_type, :string,
       description: "The analysis type of the image (FISH, Prostate, etc.)"
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     field :user, :user, resolve: assoc(:user)
     field :billing_code, :billing_code, resolve: assoc(:billing_code)
@@ -216,11 +240,15 @@ defmodule PeepgApi.Schema.Types do
     field :metadata, :string,
       description: "The metadata the image contains ***********"
     field :approval_status, :string,
-      description: "The approval status of the analysis (approved, not approved,awaiting approval.)"    
+      description: "The approval status of the analysis (approved, not approved,awaiting approval.)"
     field :approval_updated_at, :string, #datetime
       description: "Identifies the date / time of the approval status update."
     field :final_grade, :integer,
-      description: "The final grade given to the image / analysis."    
+      description: "The final grade given to the image / analysis."
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     field :image, :image, resolve: assoc(:image)
     # approval_updated_by_id (user)
@@ -230,9 +258,13 @@ defmodule PeepgApi.Schema.Types do
   @desc "Represents the preset based on disease type and other settings ******???????**"
   object :analysis_preset do
     field :name, :string,
-      description: "The name of the preset."  
+      description: "The name of the preset."
     field :settings, :string,
       description: "The settings ............ analysis type*****"
+    field :inserted_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was inserted."
+    field :updated_at, :string, #need a datetime
+      description: "Identifies the date and time when the object was updated."
 
     field :billing_code, :billing_code, resolve: assoc(:billing_code)
   end

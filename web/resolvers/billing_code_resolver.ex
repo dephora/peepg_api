@@ -14,7 +14,7 @@ defmodule PeepgApi.BillingCodeResolver do
   end
 
   def create(args, _info) do
-    changeset = BillingCode .changeset(%BillingCode {}, args)
+    changeset = BillingCode.changeset(%BillingCode {}, args)
 
     case Repo.insert(changeset) do
       {:ok, billing_code} -> {:ok, billing_code}
