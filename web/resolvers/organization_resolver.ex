@@ -12,4 +12,13 @@ defmodule PeepgApi.OrganizationResolver do
       organization -> {:ok, organization}
     end
   end
+
+  def create(args, _info) do
+    changeset = Organization.changeset(%Organization{}, args)
+
+    case Repo.insert(changeset) do
+      {:ok, organization} -> {:ok, organization}
+      {:error, changeset} -> {:error, inspect(changeset.errors)}
+    end
+  end
 end

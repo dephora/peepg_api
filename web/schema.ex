@@ -1,40 +1,10 @@
 defmodule PeepgApi.Schema do
   use Absinthe.Schema
   import_types PeepgApi.Schema.Types
-  # will need to do multiple imports of all the type files 
+  # will need to do multiple imports of all the type files
   # once they are broken up
 
-  # mutation do
 
-  #   @desc "Create a user"
-  #   field: user, type: user do
-  #     arg :email, non_null(:string)
-  #     arg :name_first, non_null(:string)
-  #     arg :name_last, non_null(:string)
-  #     arg :phone_main, :string
-  #     arg :phone_main_ext, :string
-  #     arg :status, non_null(:string)
-  #     arg :roles_mask, non_null(:int)
-
-  #     resolve &PeepgApi.UserResolver.create/2
-    
-  # end
-
-  #   @desc "Create an organization"
-  #   field: user, type: user do
-  #     arg :name_first, non_null(:string)
-  #     arg :name_secondary, :string
-  #     arg :phone_main, :string
-  #     arg :email, non_null(:string)
-  #     arg :phone_main_ext, :string
-  #     arg :status, non_null(:string)
-  #     arg :roles_mask, non_null(:int)
-
-  #     resolve &PeepgApi.UserResolver.create/2
-  #   end
-  # end
-
-  
   query do
 
     @desc "Get a list of all organizations."
@@ -146,7 +116,39 @@ defmodule PeepgApi.Schema do
       arg :id, non_null(:id)
       resolve &PeepgApi.AnalysisInfoResolver.find/2
     end
+  end
 
+  @desc "Test"
+  mutation do
+    @desc "Create an organization. Required fields are `name_main`, `phone_main`, `email_main`, `status`."
+    field :create_organization, type: :organization do
+      arg :name_main, non_null(:string)
+      arg :name_secondary, :string
+      arg :phone_main, non_null(:string)
+      arg :phone_main_ext, :string
+      arg :phone_secondary, :string
+      arg :phone_secondary_ext, :string      
+      arg :email_main, non_null(:string)
+      arg :email_secondary, :string
+      arg :phone_main_ext, :string
+      arg :status, non_null(:string)
+      arg :comments, :string     
+
+      resolve &PeepgApi.OrganizationResolver.create/2
+    end
+
+    # @desc "Create a user"
+    # field: user, type: user do
+    #   arg :email, non_null(:string)
+    #   arg :name_first, non_null(:string)
+    #   arg :name_last, non_null(:string)
+    #   arg :phone_main, :string
+    #   arg :phone_main_ext, :string
+    #   arg :status, non_null(:string)
+    #   arg :roles_mask, non_null(:int)
+
+    #   resolve &PeepgApi.UserResolver.create/2
+    # end
 
   end
 end
