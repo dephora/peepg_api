@@ -4,6 +4,7 @@ defmodule PeepgApi.Subscription do
   schema "subscriptions" do
     field :start_date, Timex.Ecto.Date
     field :end_date, Timex.Ecto.Date
+
     belongs_to :organization, PeepgApi.Organization
     belongs_to :plan, PeepgApi.Plan
 
@@ -15,7 +16,7 @@ defmodule PeepgApi.Subscription do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:start_date, :end_date])
-    |> validate_required([:start_date, :end_date])
+    |> cast(params, [:start_date, :end_date, :organization_id, :plan_id])
+    |> validate_required([:start_date, :end_date, :organization_id, :plan_id])
   end
 end

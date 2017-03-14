@@ -13,7 +13,7 @@ defmodule PeepgApi.BillingCode do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name])
-    |> validate_required([:name])
+    |> cast(params, [:name, :organization_id])
+    |> validate_required([:name, :organization_id])
   end
 end

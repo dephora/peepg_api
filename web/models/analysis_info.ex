@@ -8,6 +8,7 @@ defmodule PeepgApi.AnalysisInfo do
     field :approval_status, :string
     field :approval_updated_at, Timex.Ecto.DateTime
     field :final_grade, :integer
+
     belongs_to :image, PeepgApi.Image
 
     #todo approval_updated_by_id (user)
@@ -20,8 +21,8 @@ defmodule PeepgApi.AnalysisInfo do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
-    # |> validate_required([:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade])
+    |> cast(params, [:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade, :image_id])
+    # |> validate_required([:total_parts, :analyzed_parts, :metadata, :approval_status, :approval_updated_at, :final_grade, :image_id])
   end
 
   

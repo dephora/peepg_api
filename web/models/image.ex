@@ -8,7 +8,8 @@ defmodule PeepgApi.Image do
     field :processing_stage, :string
     field :state, :string
     field :metadata, :string
-    field :analysis_type, :string    
+    field :analysis_type, :string
+
     belongs_to :user, PeepgApi.User
     belongs_to :billing_code, PeepgApi.BillingCode
     has_one :analysis_info, PeepgApi.AnalysisInfo
@@ -21,8 +22,8 @@ defmodule PeepgApi.Image do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name_original, :name_processed, :filename_original, :processing_stage, :state, :metadata, :analysis_type])
-    |> validate_required([:name_original, :filename_original, :analysis_type])
+    |> cast(params, [:name_original, :name_processed, :filename_original, :processing_stage, :state, :metadata, :analysis_type, :user_id, :billing_code_id])
+    |> validate_required([:name_original, :filename_original, :analysis_type, :user_id, :billing_code_id])
     |> validate_filename(:filename_original)
   end
 
@@ -38,5 +39,5 @@ defmodule PeepgApi.Image do
     end
   end
 
-  
+
 end
