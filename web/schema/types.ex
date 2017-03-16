@@ -56,6 +56,8 @@ defmodule PeepgApi.Schema.Types do
     # need to handle the contact lead / secondary
   end
 
+ 
+
   # It's not really an 'account', should we use 'entity'?
   @desc "A department is a CytoSavvy account that belongs to an organization and has users."
   object :department do
@@ -218,7 +220,8 @@ defmodule PeepgApi.Schema.Types do
       description: "###################"
     field :metadata, :string,
       description: "The metadata the image contains."
-    field :analysis_type, :string,
+    field :analysis_type, :string,     
+    # https://hexdocs.pm/absinthe/Absinthe.Schema.Notation.html#enum/3
       description: "The analysis type of the image (FISH, Prostate, etc.)"
     field :inserted_at, :string, #need a datetime
       description: "Identifies the date and time when the object was inserted."

@@ -21,4 +21,15 @@ defmodule PeepgApi.UserResolver do
       {:error, changeset} -> {:error, inspect(changeset.errors)}
     end
   end
+
+  def update(%{id: id, user: user_params}, _info) do
+    Repo.get!(User, id)
+    |> User.changeset(user_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    user = Repo.get!(User, id)
+    Repo.delete(user)
+  end
 end

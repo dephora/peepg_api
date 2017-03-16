@@ -5,8 +5,8 @@ defmodule PeepgApi.Repo.Migrations.CreateDepartment do
     create table(:departments) do
       add :name_main, :string, null: false
       add :name_secondary, :string
-      add :phone_main, :string
-      add :phone_main_ext, :string, null: false
+      add :phone_main, :string, null: false
+      add :phone_main_ext, :string
       add :phone_secondary, :string
       add :phone_secondary_ext, :string
       add :email, :string, null: false

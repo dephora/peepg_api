@@ -21,4 +21,15 @@ defmodule PeepgApi.OrganizationResolver do
       {:error, changeset} -> {:error, inspect(changeset.errors)}
     end
   end
+
+  def update(%{id: id, organization: organization_params}, _info) do
+    Repo.get!(Organization, id)
+    |> Organization.changeset(organization_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    organization = Repo.get!(Organization, id)
+    Repo.delete(organization)
+  end
 end

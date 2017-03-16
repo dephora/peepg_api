@@ -30,8 +30,8 @@ defmodule PeepgApi.Department do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :phone_main, :phone_main_ext, :phone_secondary, :phone_secondary_ext, :email, :status, :comments, :remember_inserted_at, :organization_id, :billing_code_id])
-    |> validate_required([:name, :phone_main, :email, :status, :organization_id, :billing_code])
+    |> cast(params, [:name_main, :name_secondary, :phone_main, :phone_main_ext, :phone_secondary, :phone_secondary_ext, :email, :status, :comments, :remember_inserted_at, :organization_id, :billing_code_id])
+    |> validate_required([:name_main, :phone_main, :email, :status, :organization_id, :billing_code_id])
     |> validate_format(:email,  ~r/@/)
     |> unique_constraint(:email)
   end
