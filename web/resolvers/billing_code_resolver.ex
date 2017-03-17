@@ -21,4 +21,15 @@ defmodule PeepgApi.BillingCodeResolver do
       {:error, changeset} -> {:error, inspect(changeset.errors)}
     end
   end
+
+  def update(%{id: id, billing_code: billing_code_params}, _info) do
+    Repo.get!(BillingCode, id)
+    |> BillingCode.changeset(billing_code_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    billing_code = Repo.get!(BillingCode, id)
+    Repo.delete(billing_code)
+  end
 end

@@ -21,4 +21,17 @@ defmodule PeepgApi.PlanResolver do
       {:error, changeset} -> {:error, inspect(changeset.errors)}
     end
   end
+
+  def update(%{id: id, plan: plan_params}, _info) do
+    Repo.get!(Plan, id)
+    |> Plan.changeset(plan_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    plan = Repo.get!(Plan, id)
+    Repo.delete(plan)
+  end
+
+  
 end

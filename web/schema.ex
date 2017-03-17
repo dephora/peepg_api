@@ -162,10 +162,38 @@ defmodule PeepgApi.Schema do
     field :department_id, :integer
   end
 
+  input_object :update_billing_code_params do
+    field :id, :id
+    field :name, :string
+    field :organization_id, :integer
+  end
+
+  input_object :update_plan_params do
+    field :plan_code, :string
+    field :name, :string
+    field :description, :string
+    field :active, :boolean
+    field :plan_interval_unit, :string
+    field :plan_interval_length, :integer
+    field :plan_quota, :integer
+  end
+
+  input_object :update_image_params do
+    field :name_original, :string
+    field :name_processed, :string
+    field :filename_original, :string
+    field :processing_stage, :string
+    field :state, :string
+    field :metadata, :string
+    field :analysis_type, :string
+    field :user_id, :integer
+    field :billing_code, :integer
+  end
+
   mutation do
 
     #--------------- ORGANIZATION ---------------#
-    @desc "Create an organization. Required fields are `name_main`, `phone_main`, `email_main`, `status`."
+    @desc "Create an organization. Required fields: `name_main`, `phone_main`, `email_main`, `status`."
     field :create_organization, type: :organization do
       arg :name_main, non_null(:string)
       arg :name_secondary, :string
@@ -181,7 +209,7 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.OrganizationResolver.create/2
     end
 
-    @desc "Update an organization. Required fields are `name_main`, `phone_main`, `email_main`, `status`."
+    @desc "Update an organization. Required fields: `name_main`, `phone_main`, `email_main`, `status`."
     field :update_organization, type: :organization do
       arg :id, non_null(:integer)
       arg :organization, :update_organization_params
@@ -197,8 +225,9 @@ defmodule PeepgApi.Schema do
     end
     #--------------- END ORGANIZATION ---------------#
 
+
     #--------------- DEPARTMENT ---------------#
-    @desc "Create a department. Required fields are `name_main`, `phone_main`, `email_main`, `status`."
+    @desc "Create a department. Required fields: `name_main`, `phone_main`, `email_main`, `status`."
     field :create_department, type: :department do
       arg :name_main, non_null(:string)
       arg :name_secondary, :string
@@ -216,7 +245,7 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.DepartmentResolver.create/2
     end
 
-    @desc "Update a department. Required fields are `name_main`, `phone_main`, `email_main`, `status`."
+    @desc "Update a department. Required fields: `name_main`, `phone_main`, `email_main`, `status`."
     field :update_department, type: :department do
       arg :id, non_null(:integer)
       arg :department, :update_department_params
@@ -234,7 +263,7 @@ defmodule PeepgApi.Schema do
 
 
     #--------------- USER ---------------#
-    @desc "Create a user. Required fields are `email`, `name_first`, `name_last`, `status`, `roles_mask`."
+    @desc "Create a user. Required fields: `email`, `name_first`, `name_last`, `status`, `roles_mask`."
     field :create_user, type: :user do
       arg :email, non_null(:string)
       arg :name_first, non_null(:string)
@@ -264,8 +293,90 @@ defmodule PeepgApi.Schema do
 
       resolve &PeepgApi.UserResolver.delete/2
     end
-
     #--------------- END USER ---------------#
 
+
+    #--------------- BILLING CODE ---------------#
+    @desc "Create a billing code. Required fields: `name`."
+    field :create_billing_code, type: :billing_code do
+      arg :name, non_null(:string)
+      arg :organization_id, non_null(:integer)
+
+      resolve &PeepgApi.BillingCodeResolver.create/2
+    end
+
+    @desc "Update a billing code. Required fields: `name`."
+    field :update_billing_code, type: :billing_code do
+      arg :id, non_null(:integer)
+      arg :billing_code, :update_billing_code_params
+
+      resolve &PeepgApi.BillingCodeResolver.update/2
+    end
+
+    @desc "Delete a billing code."
+    field :delete_billing_code, type: :billing_code do
+      arg :id, non_null(:integer)
+
+      resolve &PeepgApi.BillingCodeResolver.delete/2
+    end
+    #--------------- END BILLING CODE ---------------#
+
+
+    #--------------- BILLING CODE GROUP ---------------#
+    
+    # TODO 
+
+    #--------------- END BILLING CODE ---------------#
+
+
+    #--------------- PLAN ---------------#
+    @desc "Create a plan. Required fields: `plan_code`, `name`, `active`, `plan_interval_unit`, `plan_quota`."
+    field :create_plan, type: :plan do
+      arg :plan_code, non_null(:string)
+      arg :name, non_null(:string)
+      arg :description, :string
+      arg :active, non_null(:boolean)
+      arg :plan_interval_unit, non_null(:string)
+      arg :plan_interval_length, non_null(:integer)
+      arg :plan_quota, non_null(:integer)
+      arg :organization_id, non_null(:integer)
+
+      resolve &PeepgApi.PlanResolver.create/2
+    end
+
+    @desc "Update a plan. Required fields: `name`."
+    field :update_plan, type: :plan do
+      arg :id, non_null(:integer)
+      arg :plan, :update_plan_params
+
+      resolve &PeepgApi.PlanResolver.update/2
+    end
+
+    @desc "Delete a plan."
+    field :delete_plan, type: :plan do
+      arg :id, non_null(:integer)
+
+      resolve &PeepgApi.PlanResolver.delete/2
+    end
+    #--------------- END PLAN ---------------#
+
+
+    #--------------- IMAGE ---------------#
+    @desc "Update an image. Required fields: `name_original`, `filename_original`, `processing_stage`, `state`, `analysis_type`, `user`."
+    #  TODO how do we handle updating user / billing code?
+    field :update_image, type: :image do
+      arg :id, non_null(:integer)
+      arg :image, :update_image_params
+
+      resolve &PeepgApi.ImageResolver.update/2
+    end
+
+    @desc "Delete a image."
+    field :delete_image, type: :image do
+      arg :id, non_null(:integer)
+
+      resolve &PeepgApi.ImageResolver.delete/2
+    end
+    #--------------- END IMAGE ---------------#
   end
 end

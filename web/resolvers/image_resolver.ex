@@ -13,12 +13,23 @@ defmodule PeepgApi.ImageResolver do
     end
   end
 
-  def create(args, _info) do
-    changeset = Image.changeset(%Image{}, args)
+  # def create(args, _info) do
+  #   changeset = Image.changeset(%Image{}, args)
 
-    case Repo.insert(changeset) do
-      {:ok, image} -> {:ok, image}
-      {:error, changeset} -> {:error, inspect(changeset.errors)}
-    end
+  #   case Repo.insert(changeset) do
+  #     {:ok, image} -> {:ok, image}
+  #     {:error, changeset} -> {:error, inspect(changeset.errors)}
+  #   end
+  # end
+
+  def update(%{id: id, image: image_params}, _info) do
+    Repo.get!(Image, id)
+    |> Image.changeset(image_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    image = Repo.get!(Image, id)
+    Repo.delete(image)
   end
 end
