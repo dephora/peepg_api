@@ -108,13 +108,13 @@ defmodule PeepgApi.Schema do
 
     @desc "Get a list of all analysis presets."
     field :analysis_presets, list_of(:analysis_preset) do
-      resolve &PeepgApi.AnalysisInfoResolver.all/2
+      resolve &PeepgApi.AnalysisPresetResolver.all/2
     end
 
     @desc "Get a single analyis preset by ID."
     field :analysis_preset, type: :analysis_preset do
       arg :id, non_null(:id), description: "The ID of the analysis preset."
-      resolve &PeepgApi.AnalysisInfoResolver.find/2
+      resolve &PeepgApi.AnalysisPresetResolver.find/2
     end
   end
 
@@ -190,6 +190,22 @@ defmodule PeepgApi.Schema do
     field :billing_code, :integer
   end
 
+  input_object :update_analysis_info_params do
+    field :total_parts, :integer
+    field :analyzed_parts, :integer
+    field :metadata, :string
+    field :approval_status, :string
+    # field :approval_updated_at, Timex.Ecto.DateTime # TODO Handle this
+    field :final_grade, :integer
+    field :image, :integer
+  end
+
+  input_object :update_analysis_preset_params do
+    field :name, :string
+    field :settings, :string
+    field :billing_code, :integer   
+  end
+
   mutation do
 
     #--------------- ORGANIZATION ---------------#
@@ -227,7 +243,7 @@ defmodule PeepgApi.Schema do
 
 
     #--------------- DEPARTMENT ---------------#
-    @desc "Create a department. Required fields: `name_main`, `phone_main`, `email_main`, `status`."
+    @desc "Create a department. Required fields: `name_main`, `phone_main`, `email_main`, `status`, `organization_id`, `billing_code_id`."
     field :create_department, type: :department do
       arg :name_main, non_null(:string)
       arg :name_secondary, :string
@@ -245,7 +261,7 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.DepartmentResolver.create/2
     end
 
-    @desc "Update a department. Required fields: `name_main`, `phone_main`, `email_main`, `status`."
+    @desc "Update a department. Required fields: `name_main`, `phone_main`, `email_main`, `status`, `organization_id`, `billing_code_id`."
     field :update_department, type: :department do
       arg :id, non_null(:integer)
       arg :department, :update_department_params
@@ -263,7 +279,7 @@ defmodule PeepgApi.Schema do
 
 
     #--------------- USER ---------------#
-    @desc "Create a user. Required fields: `email`, `name_first`, `name_last`, `status`, `roles_mask`."
+    @desc "Create a user. Required fields: `email`, `name_first`, `name_last`, `status`, `roles_mask`, `department_id`."
     field :create_user, type: :user do
       arg :email, non_null(:string)
       arg :name_first, non_null(:string)
@@ -279,7 +295,7 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.UserResolver.create/2
     end
 
-    @desc "Update a user. Required fields are `email`, `name_first`, `name_last`, `status`, `roles_mask`."
+    @desc "Update a user. Required fields are `email`, `name_first`, `name_last`, `status`, `roles_mask`, `department_id`."
     field :update_user, type: :user do
       arg :id, non_null(:integer)
       arg :user, :update_user_params
@@ -297,7 +313,7 @@ defmodule PeepgApi.Schema do
 
 
     #--------------- BILLING CODE ---------------#
-    @desc "Create a billing code. Required fields: `name`."
+    @desc "Create a billing code. Required fields: `name`, `organization_id`."
     field :create_billing_code, type: :billing_code do
       arg :name, non_null(:string)
       arg :organization_id, non_null(:integer)
@@ -305,7 +321,7 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.BillingCodeResolver.create/2
     end
 
-    @desc "Update a billing code. Required fields: `name`."
+    @desc "Update a billing code. Required fields: `name`, `organization_id`."
     field :update_billing_code, type: :billing_code do
       arg :id, non_null(:integer)
       arg :billing_code, :update_billing_code_params
@@ -362,7 +378,7 @@ defmodule PeepgApi.Schema do
 
 
     #--------------- IMAGE ---------------#
-    @desc "Update an image. Required fields: `name_original`, `filename_original`, `processing_stage`, `state`, `analysis_type`, `user`."
+    @desc "Update an image. Required fields: `name_original`, `filename_original`, `processing_stage`, `state`, `analysis_type`, `user`, `billing_code`."
     #  TODO how do we handle updating user / billing code?
     field :update_image, type: :image do
       arg :id, non_null(:integer)
@@ -378,5 +394,65 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.ImageResolver.delete/2
     end
     #--------------- END IMAGE ---------------#
+
+
+    #--------------- ANALYSIS INFO ---------------#
+    @desc "Create an analysis info. Required fields: `approval_status`, `image`."
+    field :create_analysis_info, type: :analysis_info do
+      arg :total_parts, :integer
+      arg :analyzed_parts, :integer
+      arg :metadata, :string
+      arg :approval_status, :string
+      # arg :approval_updated_at, Timex.Ecto.DateTime #TODO handle this
+      arg :final_grade, :integer
+      arg :image_id, non_null(:integer)
+
+      resolve &PeepgApi.AnalysisInfoResolver.create/2
+    end
+    
+    @desc "Update an analysis info. Required fields: `approval_status`, `image`."
+    field :update_analysis_info, type: :analysis_info do
+      arg :id, non_null(:integer)
+      arg :analysis_info, :update_analysis_info_params
+
+      resolve &PeepgApi.AnalysisInfoResolver.update/2
+    end
+
+    @desc "Delete an analysis info."
+    field :delete_analysis_info, type: :analysis_info do
+      arg :id, non_null(:integer)
+
+      resolve &PeepgApi.AnalysisInfoResolver.delete/2
+    end
+    #--------------- END ANALYSIS INFO ---------------#
+
+
+    #--------------- ANALYSIS PRESET ---------------#
+    @desc "Create an analysis preset. Required fields: `name`, `settings`, `billing_code`."
+    field :create_analysis_preset, type: :analysis_preset do
+      arg :name, :string 
+      arg :settings, :string     
+      arg :billing_code_id, non_null(:integer)
+
+      resolve &PeepgApi.AnalysisPresetResolver.create/2
+    end
+    
+    @desc "Update an analysis preset. Required fields: `name`, `settings`, `billing_code`."
+    field :update_analysis_preset, type: :analysis_preset do
+      arg :id, non_null(:integer)
+      arg :analysis_preset, :update_analysis_preset_params
+
+      resolve &PeepgApi.AnalysisPresetResolver.update/2
+    end
+
+    @desc "Delete an analysis preset."
+    field :delete_analysis_preset, type: :analysis_preset do
+      arg :id, non_null(:integer)
+
+      resolve &PeepgApi.AnalysisPresetResolver.delete/2
+    end
+    #--------------- END ANALYSIS PRESET ---------------#
+
+
   end
 end

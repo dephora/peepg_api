@@ -236,6 +236,7 @@ defmodule PeepgApi.Schema.Types do
 
   @desc "Represents the information of analyzed image."
   object :analysis_info do
+    field :id, :id
     field :total_parts, :integer,
       description: "The total number of parts contained by the image."
     field :analyzed_parts, :integer,
@@ -260,6 +261,7 @@ defmodule PeepgApi.Schema.Types do
 
   @desc "Represents the preset based on disease type and other settings ******???????**"
   object :analysis_preset do
+    field :id, :id
     field :name, :string,
       description: "The name of the preset."
     field :settings, :string,

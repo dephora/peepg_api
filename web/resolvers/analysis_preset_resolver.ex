@@ -21,4 +21,15 @@ defmodule PeepgApi.AnalysisPresetResolver do
       {:error, changeset} -> {:error, inspect(changeset.errors)}
     end
   end
+
+  def update(%{id: id, analysis_preset: analysis_preset_params}, _info) do
+    Repo.get!(AnalysisPreset, id)
+    |> AnalysisPreset.changeset(analysis_preset_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    analysis_preset = Repo.get!(AnalysisPreset, id)
+    Repo.delete(analysis_preset)
+  end
 end
