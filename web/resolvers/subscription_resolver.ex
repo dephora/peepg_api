@@ -21,4 +21,17 @@ defmodule PeepgApi.SubscriptionResolver do
       {:error, changeset} -> {:error, inspect(changeset.errors)}
     end
   end
+
+  def update(%{id: id, subscription: subscription_params}, _info) do
+    Repo.get!(Subscription, id)
+    |> Subscription.changeset(subscription_params)
+    |> Repo.update
+  end
+
+  def delete(%{id: id}, _info) do
+    subscription = Repo.get!(Subscription, id)
+    Repo.delete(subscription)
+  end
+
+  
 end

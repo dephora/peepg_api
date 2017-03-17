@@ -1,10 +1,19 @@
-defmodule PeepgApi.Schema do
+defmodule PeepgApi.Schema do  
   use Absinthe.Schema
-  import_types PeepgApi.Schema.Types
-  # will need to do multiple imports of all the type files
-  # once they are broken up
+  alias PeepgApi.Schema
+  import_types Schema.AnalysisInfo
+  import_types Schema.AnalysisPreset
+  import_types Schema.BillingCode
+  import_types Schema.BillingGroup
+  import_types Schema.Department
+  import_types Schema.Image
+  import_types Schema.Organization
+  import_types Schema.Plan
+  import_types Schema.Subscription
+  import_types Schema.User
 
 
+  # --------------- QUERIES --------------- #
   query do
 
     @desc "Get a list of all organizations."
@@ -62,16 +71,16 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.BillingGroupResolver.find/2
     end
 
-    # @desc "Get a list of all subscriptions."
-    # field :subscriptions, list_of(:subscription) do
-    #   resolve &PeepgApi.SubscriptionResolver.all/2
-    # end
+    @desc "Get a list of all Subscriptions."
+    field :subscriptions, list_of(:subscription) do
+      resolve &PeepgApi.SubscriptionResolver.all/2
+    end
 
-    # @desc "Get a single subscription code by ID."
-    # field :subscription, type: :subscription do
-    #   arg :id, non_null(:id)
-    #   resolve &PeepgApi.SubscriptionResolver.find/2
-    # end
+    @desc "Get a single Subscription code by ID."
+    field :subscription, type: :subscription do
+      arg :id, non_null(:id), description: "The ID of the subscription."
+      resolve &PeepgApi.SubscriptionResolver.find/2
+    end
 
     @desc "Get a list of all plans."
     field :plans, list_of(:plan) do
