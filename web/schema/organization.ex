@@ -36,11 +36,6 @@ defmodule PeepgApi.Schema.Organization do
     # field :subscriptions, list_of(:subscription), resolve: assoc(:subscriptions)
     field :billing_codes, list_of(:billing_code), resolve: assoc(:billing_codes)
 
-    # can we get users and images for all depts within the org?
-
-    # field :users, list_of(:user), resolve: assoc(:users)
-    # field :images, list_of(:image), resolve: assoc(:billing_codes)
-
     # need to handle the contact lead / secondary
   end
 

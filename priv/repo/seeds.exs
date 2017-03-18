@@ -75,23 +75,10 @@ alias PeepgApi.AnalysisPreset
 #   })
 # end
 
-# for _ <- 1..25 do
-#   Repo.insert!(%Department{
-#     name_main: Faker.Commerce.department,
-#     phone_main: Faker.Phone.EnUs.phone,
-#     phone_main_ext: Faker.Phone.EnUs.extension,
-#     email: Faker.Internet.safe_email,
-#     status: ["active", "locked"] |> Enum.take_random(1) |> hd,    
-#     comments: Faker.Lorem.sentence,
-#     organization_id: :rand.uniform(5),
-#     billing_code_id: :rand.uniform(5)
-#   })
-# end
-
 # for _ <- 1..5 do
 #   Repo.insert!(%Subscription{
-#     start_date: Timex.to_date({2017, 6, 24}),
-#     end_date: Timex.to_date({2018, 6, 24}),
+#     # start_date: Timex.to_date({2017, 6, 24}),
+#     # end_date: Timex.to_date({2018, 6, 24}),
 #     organization_id: :rand.uniform(5),
 #     plan_id: [2, 3, 4, 5] |> Enum.take_random(1) |> hd,
 #   })

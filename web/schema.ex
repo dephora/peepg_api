@@ -13,7 +13,8 @@ defmodule PeepgApi.Schema do
   import_types Schema.User
 
 
-  # --------------- QUERIES --------------- #
+  # ============================ QUERIES ============================ #
+
   query do
 
     @desc "Get a list of all organizations."
@@ -71,16 +72,10 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.BillingGroupResolver.find/2
     end
 
-    @desc "Get a list of all Subscriptions."
-    field :subscriptions, list_of(:subscription) do
-      resolve &PeepgApi.SubscriptionResolver.all/2
-    end
-
-    @desc "Get a single Subscription code by ID."
-    field :subscription, type: :subscription do
-      arg :id, non_null(:id), description: "The ID of the subscription."
-      resolve &PeepgApi.SubscriptionResolver.find/2
-    end
+    # @desc "Get a list of all subscriptions."
+    # field :subscriptions, list_of(:subscription) do
+    #   resolve &PeepgApi.SubscriptionResolver.all/2
+    # end
 
     @desc "Get a list of all plans."
     field :plans, list_of(:plan) do
@@ -126,6 +121,10 @@ defmodule PeepgApi.Schema do
       resolve &PeepgApi.AnalysisPresetResolver.find/2
     end
   end
+
+  # ============================ END QUERIES ============================ #
+
+  # ========================== INPUT OBJECTS ========================== #
 
   # if we use non_null, we have to pass in all current fields to update,
   # should we do this and just pass in existing if not modified in the
@@ -214,6 +213,10 @@ defmodule PeepgApi.Schema do
     field :settings, :string
     field :billing_code, :integer   
   end
+
+  # ========================== END INPUT OBJECTS ========================== #
+
+  # ============================ MUTATIONS ============================ #
 
   mutation do
 
@@ -462,6 +465,7 @@ defmodule PeepgApi.Schema do
     end
     #--------------- END ANALYSIS PRESET ---------------#
 
-
   end
+
+  # ============================ END MUTATIONS ============================ #
 end

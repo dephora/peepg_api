@@ -15,7 +15,7 @@ defmodule PeepgApi.Organization do
     field :remember_inserted_at, Timex.Ecto.DateTime
 
     has_many :departments, PeepgApi.Department
-    has_many :subscriptions, PeepgApi.Sub
+    has_many :subscriptions, PeepgApi.Subscription
     # has_many :quota_periods, PeepgApi.QuotaPeriod
     has_many :billing_codes, PeepgApi.BillingCode
     # has_one :contact_lead, PeepgApi.User #through depts ?
