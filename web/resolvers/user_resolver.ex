@@ -1,6 +1,13 @@
 defmodule PeepgApi.UserResolver do
   alias PeepgApi.Repo
   alias PeepgApi.User
+  
+  def login(params, _info) do
+    with {:ok, user} <- PeepgApi.Session.authenticate(params, Repo),
+        {:ok, jwt, _ } <- Guardian.encode_and_sign(user, :access) do
+      {:ok, %{token: jwt}}
+    end
+  end
 
   def all(_args, _info) do
     {:ok, Repo.all(User)}
@@ -24,7 +31,7 @@ defmodule PeepgApi.UserResolver do
 
   def update(%{id: id, user: user_params}, _info) do
     Repo.get!(User, id)
-    |> User.changeset(user_params)
+    |> User.update_changeset(user_params)
     |> Repo.update
   end
 

@@ -5,18 +5,23 @@ defmodule PeepgApi.Schema.Subscription do
   @desc "************* NEED GOOD DESC ***************"
   object :subscription do
     field :id, :id
-    field :start_date, :string, #need date
-      description: "Identifies the start date of the subscription."
-    field :end_date, :string, #need date
-      description: "Identifies the end date of the subscription."
-    field :inserted_at, :string, #need a datetime
-      description: "Identifies the date and time when the object was inserted."
-    field :updated_at, :string, #need a datetime
-      description: "Identifies the date and time when the object was updated."
+    
+    @desc "Identifies the start date of the subscription."
+    field :start_date, :string #need date
+    
+    @desc "Identifies the end date of the subscription."
+    field :end_date, :string #need date
+    
+    @desc "Identifies the date and time when the object was inserted."
+    field :inserted_at, :string #need a datetime
+    
+    @desc "Identifies the date and time when the object was updated."
+    field :updated_at, :string #need a datetime
 
-    field :organization, :organization, resolve: assoc(:organization),
-      description: "The organization the subscription belongs to."
-    field :plan, :plan, resolve: assoc(:plan),
-      description: "The plan the subscription belongs to."
+    @desc "The organization the subscription belongs to."
+    field :organization, :organization, resolve: assoc(:organization)
+    
+    @desc "The plan the subscription belongs to."
+    field :plan, :plan, resolve: assoc(:plan)
   end
 end

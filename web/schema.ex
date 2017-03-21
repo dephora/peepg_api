@@ -9,6 +9,7 @@ defmodule PeepgApi.Schema do
   import_types Schema.Image
   import_types Schema.Organization
   import_types Schema.Plan
+  import_types Schema.Session
   import_types Schema.Subscription
   import_types Schema.User
 
@@ -157,12 +158,12 @@ defmodule PeepgApi.Schema do
   end
 
   input_object :update_user_params do
-    field :id, :id
     field :email, :string
     field :name_first, :string
     field :name_last, :string
     field :phone_main, :string
     field :phone_main_ext, :string
+    field :password, :string
     field :status, :string
     field :comments, :string
     field :roles_mask, :integer
@@ -213,6 +214,8 @@ defmodule PeepgApi.Schema do
     field :settings, :string
     field :billing_code, :integer   
   end
+
+  
 
   # ========================== END INPUT OBJECTS ========================== #
 
@@ -320,6 +323,14 @@ defmodule PeepgApi.Schema do
       arg :id, non_null(:integer)
 
       resolve &PeepgApi.UserResolver.delete/2
+    end
+
+    @desc "Log in a user."
+    field :login, type: :session do
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+
+      resolve &PeepgApi.UserResolver.login/2     
     end
     #--------------- END USER ---------------#
 

@@ -1,9 +1,22 @@
 defmodule PeepgApi.ImageResolver do
   alias PeepgApi.Repo
   alias PeepgApi.Image
+  import Ecto.Query, only: [where: 2]
 
-  def all(_args, _info) do
-    {:ok, Repo.all(Image)}
+  # def all(_args, _info) do
+  #   {:ok, Repo.all(Image)}
+  # end
+  def all(_args, %{context: %{current_user: %{id: id}}}) do
+    images =
+      Image
+      |> where(user_id: ^id)
+      |> Repo.all
+  
+    {:ok, images}
+  end
+
+  def all(args, _info) do
+    {:error, "Not Authorized"}
   end
 
   def find(%{id: id}, _info) do

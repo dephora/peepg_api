@@ -19,7 +19,7 @@ defmodule PeepgApi.Mixfile do
   def application do
     [mod: {PeepgApi, []},
      applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :absinthe, :absinthe_plug, :absinthe_ecto, :faker, :cors_plug, :timex,:timex_ecto, :ex_phone_number ]]
+                    :phoenix_ecto, :postgrex, :absinthe, :absinthe_plug, :absinthe_ecto, :faker, :cors_plug, :timex,:timex_ecto, :ex_phone_number, :comeonin, :guardian ]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,6 +35,7 @@ defmodule PeepgApi.Mixfile do
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
      {:gettext, "~> 0.11"},
+     {:cowboy, "~> 1.0"},
      {:absinthe, "~> 1.2"},
      {:absinthe_plug, "~> 1.2"},
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
@@ -43,7 +44,9 @@ defmodule PeepgApi.Mixfile do
      {:timex, "~> 3.0"},
      {:timex_ecto, "~> 3.0"},
      {:ex_phone_number, git: "https://github.com/socialpaymentsbv/ex_phone_number.git", branch: "develop"},
-     {:cowboy, "~> 1.0"}]
+     {:guardian, "~> 0.14.2"},
+     {:comeonin, "~> 3.0"}
+  ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

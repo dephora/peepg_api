@@ -5,12 +5,15 @@ defmodule PeepgApi.Schema.BillingCode do
   @desc "************* NEED GOOD DESC ***************"
   object :billing_code do
     field :id, :id
-    field :name, :string,
-      description: "The billing code name."
-    field :inserted_at, :string, #need a datetime
-      description: "Identifies the date and time when the object was inserted."
-    field :updated_at, :string, #need a datetime
-      description: "Identifies the date and time when the object was updated."
+
+    @desc "The billing code name."
+    field :name, :string
+
+    @desc "Identifies the date and time when the object was inserted."
+    field :inserted_at, :string #need a datetime
+    
+    @desc "Identifies the date and time when the object was updated." 
+    field :updated_at, :string #need a datetime
 
     field :organization, :organization, resolve: assoc(:organization)
   end
